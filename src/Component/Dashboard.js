@@ -1,9 +1,11 @@
 //Create a simple class component in the Dashboard and Wizard files. For now just return a div containing the component's name from the render method.
 import React, { Component } from "react";
+// import { connect } from "react-redux";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import House from "./House";
 import "./Dashboard.css";
+// import { name, address, city, state, zip, id } from "../ducks/reducer";
 export default class Dashboard extends Component {
   constructor() {
     super();
@@ -25,7 +27,7 @@ export default class Dashboard extends Component {
     });
   }
   render() {
-    console.log(this.state.house);
+    console.log(this.props);
     const homes = this.state.house.map((e, i) => {
       return (
         <House
@@ -51,3 +53,15 @@ export default class Dashboard extends Component {
     );
   }
 }
+// function mapStateToProps(state) {
+//   const { name, address, city, state, zip, id } = this.house;
+//   return {
+//     name,
+//     address,
+//     city,
+//     state,
+//     zip,
+//     id
+//   };
+// }
+// export default connect(mapStateToProps)(Dashboard);

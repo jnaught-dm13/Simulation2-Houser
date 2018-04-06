@@ -1,0 +1,11 @@
+.dashboard-list {
+  background-color: #f6f0f0;
+  height: 170px;
+  width: auto;
+  margin-top: 10px;
+}
+.property-list {
+}
+.button-delete {
+  float: right;
+}

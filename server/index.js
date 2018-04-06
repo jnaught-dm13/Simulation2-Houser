@@ -9,7 +9,7 @@ const port = process.env.PORT || 3001;
 
 massive(process.env.CONNECTION_STRING)
   .then(dbInstance => {
-    console.log(dbInstance);
+    // console.log(dbInstance);
     app.set("db", dbInstance);
   })
   .catch(err => console.log(err));
@@ -17,7 +17,9 @@ massive(process.env.CONNECTION_STRING)
 app.use(json());
 
 app.get("/api/getData", controller.getData);
+app.post("/api/addProperty", controller.addProperty);
+app.delete("/api/removeProperty/:id", controller.removeProperty);
 
-app.listen(process.env.PORT, () => {
-  console.log(`I'm listening on port: ${process.env.PORT || 3001}`);
+app.listen(port, () => {
+  console.log(`I'm listening on port: ${port}`);
 });

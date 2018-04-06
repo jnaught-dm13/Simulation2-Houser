@@ -1,10 +1,18 @@
-.dashboard-list {
+.dashboard-main {
+  background-color: #c3ebd6;
+  height: 100vh;
+  width: 100vw;
+}
+/* .dashboard-list {
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+} */
+.property-list {
   background-color: #f6f0f0;
   height: 170px;
-  width: auto;
+  width: 50vw;
   margin-top: 10px;
-}
-.property-list {
 }
 .button-delete {
   float: right;

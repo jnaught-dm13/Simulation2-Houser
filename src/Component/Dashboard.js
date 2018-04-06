@@ -1,6 +1,7 @@
 //Create a simple class component in the Dashboard and Wizard files. For now just return a div containing the component's name from the render method.
 import React, { Component } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import House from "./House";
 import "./Dashboard.css";
 export default class Dashboard extends Component {
@@ -9,6 +10,7 @@ export default class Dashboard extends Component {
     this.state = {
       house: []
     };
+    this.removeProperty = this.removeProperty.bind(this);
   }
   componentDidMount() {
     axios.get("api/getData").then(response => {
@@ -16,35 +18,35 @@ export default class Dashboard extends Component {
       this.setState({ house: response.data });
     });
   }
+  removeProperty(id) {
+    axios.delete(`api/removeProperty/${id}`).then(response => {
+      this.setState({ house: response.data });
+      this.componentDidMount();
+    });
+  }
   render() {
     console.log(this.state.house);
     const homes = this.state.house.map((e, i) => {
       return (
-        <div className="dashboard-list" key={i}>
-          <div className="property-list">
-            <div className="button-delete">
-              <button>X</button>
-            </div>
-            <div>
-              <p>Property Name: {e.name}</p>
-              <br />
-              <p>Address: {e.address}</p>
-              <br />
-              <p>City: {e.city}</p>
-              <br />
-              <p>State: {e.state}</p>
-              <br />
-              <p>Zip: {e.zip}</p>
-            </div>
-          </div>
-        </div>
+        <House
+          removeProperty={this.removeProperty}
+          key={e.id}
+          name={e.name}
+          address={e.address}
+          city={e.city}
+          state={e.state}
+          zip={e.zip}
+          id={e.id}
+        />
       );
     });
     return (
-      <div>
-        <p> Dashboard Component</p>
+      <div className="dashboard-main">
+        <p> Dashboard </p>
+        <Link className="" to="/wizard">
+          <h3>Add New Property</h3>
+        </Link>
         {homes}
-        <House />
       </div>
     );
   }
